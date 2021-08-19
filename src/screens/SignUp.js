@@ -13,6 +13,8 @@ import FormError from "../component/Auth/FormError";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(
@@ -94,7 +96,9 @@ const SignUp = () => {
     <Container>
       <PageTitle pageTitle="Sign up" />
       <MainBox>
-        <CoffeeIcon />
+        <CoffeeIcon>
+          <FontAwesomeIcon icon={faCoffee} />
+        </CoffeeIcon>
         <FaceBook />
         <Divder>
           <div></div>

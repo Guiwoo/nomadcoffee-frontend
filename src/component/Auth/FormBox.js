@@ -5,6 +5,11 @@ const FormBox = styled.form`
   flex-direction: column;
   width: 80%;
   margin-bottom: 30px;
+  label {
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+  }
   input {
     box-sizing: border-box;
     padding: 5px;
@@ -12,12 +17,14 @@ const FormBox = styled.form`
     border-bottom: 1px solid white;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    font-size: 18px;
     &:last-child {
       padding: 10px;
     }
-    &:focus {
-      border-bottom: 1px solid yellow;
-      border-top: 1px solid yellow;
+    &:not(:last-child) {
+      &:hover {
+        border: 2px solid blue;
+      }
     }
     &::placeholder {
       font-size: 17px;

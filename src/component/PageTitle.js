@@ -3,7 +3,7 @@ import PropTypes from "proptypes";
 
 const PageTitle = ({ pageTitle }) => (
   <Helmet>
-    <title>{pageTitle} | Coffee </title>
+    <title>{pageTitle} | Nomad Coffee </title>
   </Helmet>
 );
 

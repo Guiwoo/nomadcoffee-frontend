@@ -1,5 +1,3 @@
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 const CoffeeIcon = styled.div`
@@ -11,8 +9,4 @@ const CoffeeIcon = styled.div`
   border-radius: 50%;
 `;
 
-export default () => (
-  <CoffeeIcon>
-    <FontAwesomeIcon icon={faCoffee} />
-  </CoffeeIcon>
-);
+export default CoffeeIcon;

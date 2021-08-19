@@ -1,4 +1,10 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  makeVar,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 const TOKEN = "token";
 const DARK_MODE = "dark";
@@ -14,7 +20,7 @@ export const logUserOut = () => {
   isLoggedInVar(false);
 };
 
-export const darkModeVar = makeVar(true);
+export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 export const enableDarkMode = () => {
   localStorage.setItem(DARK_MODE, "enabled");
   darkModeVar(true);
@@ -24,7 +30,20 @@ export const disableDarkMode = () => {
   darkModeVar(false);
 };
 
-export const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: "https://nomad-backend-guiwoo.herokuapp.com/",
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      token: localStorage.getItem(TOKEN),
+    },
+  };
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });

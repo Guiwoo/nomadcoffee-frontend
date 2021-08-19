@@ -7,7 +7,7 @@ const MainBox = styled.div`
   align-items: center;
   width: 33%;
   padding: 25px 20px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid ${(props) => props.theme.borderColor};
 `;
 
 export default MainBox;

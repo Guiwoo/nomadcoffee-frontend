@@ -15,6 +15,9 @@ import { useMutation } from "@apollo/client";
 import { logUserIn } from "../apollo";
 import { useLocation } from "react-router";
 import Notification from "../component/Notification";
+import DarkMode from "../component/DarkMode";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {
@@ -75,12 +78,15 @@ const Login = () => {
   };
   return (
     <Container>
+      <DarkMode />
       <PageTitle pageTitle="Login" />
       {Boolean(location?.state?.message) ? (
         <Notification message={location?.state?.message} />
       ) : null}
       <MainBox>
-        <CoffeeIcon />
+        <CoffeeIcon>
+          <FontAwesomeIcon icon={faCoffee} />
+        </CoffeeIcon>
         <FormBox onSubmit={handleSubmit(onSubmitValid)}>
           <input
             {...register("username", {
