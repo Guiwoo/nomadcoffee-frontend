@@ -88,11 +88,6 @@ const CREATE_COFFEE_SHOP = gql`
     }
   }
 `;
-const UPLOAD_MUT = gql`
-  mutation singleUpload($file: Upload!) {
-    singleUpload(file: $file)
-  }
-`;
 
 const CreateCoffeeShop = () => {
   const history = useHistory();
