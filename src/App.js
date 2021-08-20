@@ -12,7 +12,7 @@ import { HelmetProvider } from "react-helmet-async";
 import CreateCoffeeShop from "./screens/CreateCoffeeShop";
 import Profile from "./screens/Profile";
 
-function App() {
+const App = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const darkMode = useReactiveVar(darkModeVar);
   return (
@@ -45,7 +45,7 @@ function App() {
       </HelmetProvider>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
 

@@ -3,7 +3,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-const FaceBook = styled.div`
+const SFaceBook = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,12 +21,14 @@ const FaceBook = styled.div`
   }
 `;
 
-export default () => (
-  <FaceBook>
+const FaceBook = () => (
+  <SFaceBook>
     <FontAwesomeIcon
       style={{ color: "#3b5998", fontSize: "18px", fontWeight: 600 }}
       icon={faFacebookSquare}
     />
     <span>Log in with Facebook</span>
-  </FaceBook>
+  </SFaceBook>
 );
+
+export default FaceBook;

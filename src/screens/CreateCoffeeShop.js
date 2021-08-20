@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -18,8 +17,6 @@ import {
 import routes from "../route";
 
 const Container = styled(HomeContainer)``;
-
-const SMainSection = styled(MainSection)``;
 
 const STitle = styled(Title)`
   left: 300px;
@@ -77,28 +74,32 @@ const CREATE_COFFEE_SHOP = gql`
     $latitude: String!
     $longitude: String!
     $categoryItem: String
+    $file: Upload!
   ) {
     createCoffeeShop(
       name: $name
       latitude: $latitude
       longitude: $longitude
       categoryItem: $categoryItem
+      file: $file
     ) {
       ok
       error
     }
   }
 `;
+const UPLOAD_MUT = gql`
+  mutation singleUpload($file: Upload!) {
+    singleUpload(file: $file)
+  }
+`;
 
 const CreateCoffeeShop = () => {
   const history = useHistory();
-  const [imgFile, setImgFile] = useState("#");
-  const filePreview = (e) => {
-    setImgFile(URL.createObjectURL(e.target.files[0]));
-  };
   const { register, handleSubmit, formState, setError, clearErrors } = useForm({
     mode: "onChange",
   });
+
   const [createCoffeeShop, { loading }] = useMutation(CREATE_COFFEE_SHOP, {
     onCompleted: (data) => {
       const {
@@ -119,13 +120,15 @@ const CreateCoffeeShop = () => {
     if (loading) {
       return;
     }
-    const { name, latitude, longitude, categoryItem } = data;
+    const { name, latitude, longitude, categoryItem, file } = data;
+    console.log(file[0]);
     createCoffeeShop({
       variables: {
         name,
         latitude,
         longitude,
         categoryItem,
+        file: file[0],
       },
     });
   };
@@ -141,22 +144,19 @@ const CreateCoffeeShop = () => {
         <SubSectionBox />
         <MainSection>
           <Check>
-            <FormBox>
-              {
-                <ImgFile>
-                  <img id="preView" src={imgFile} />
-                  <label htmlFor="imgFile">Shop 📷 </label>
-                  <input
-                    onFocus={filePreview}
-                    type="file"
-                    id="imgFile"
-                    name="ShopPhoto"
-                    accept="imgae/png, image/jpg"
-                  />
-                </ImgFile>
-              }
-            </FormBox>
-            <SFormBox onSubmit={handleSubmit(onSubmitValid)}>
+            <SFormBox
+              method="post"
+              enctype="multipart/form-data"
+              onSubmit={handleSubmit(onSubmitValid)}
+            >
+              <ImgFile>
+                <label htmlFor="imgFile">Shop 📷 </label>
+                <input
+                  {...register("file", { required: "Photo is required!" })}
+                  type="file"
+                  accept="imgae/png, image/jpg"
+                />
+              </ImgFile>
               <label htmlFor="name">Name</label>
               <input
                 {...register("name", {

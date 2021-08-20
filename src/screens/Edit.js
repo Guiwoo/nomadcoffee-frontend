@@ -73,7 +73,7 @@ const DELETE = gql`
   }
 `;
 
-export default ({ coffeeShops, pathname }) => {
+const Edit = ({ coffeeShops, pathname }) => {
   const history = useHistory();
   const path = pathname.split("/");
   const thePath = path[[path.length - 1]];
@@ -173,3 +173,5 @@ export default ({ coffeeShops, pathname }) => {
     </SSectionBox>
   );
 };
+
+export default Edit;

@@ -23,7 +23,7 @@ const TheIcon = styled(FontAwesomeIcon)`
   margin-right: 7px;
 `;
 
-export default () => {
+const DarkMode = () => {
   const DarkMod = useReactiveVar(darkModeVar);
   return (
     <Container onClick={() => (DarkMod ? disableDarkMode() : enableDarkMode())}>
@@ -32,3 +32,5 @@ export default () => {
     </Container>
   );
 };
+
+export default DarkMode;

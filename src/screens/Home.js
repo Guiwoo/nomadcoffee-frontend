@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../component/Header";
 import { HomeContainer, Title } from "../component/Home/HomeSection";
@@ -13,9 +12,6 @@ import {
   SubSectionBox,
 } from "../component/shared/ScreenMain";
 import Loading from "./Loading";
-
-const sampleImage =
-  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60";
 
 const SEE_COFFEE_SHOPS = gql`
   query seeCoffeeShops($page: Int!) {
@@ -30,6 +26,7 @@ const SEE_COFFEE_SHOPS = gql`
       }
       latitude
       longitude
+      file
       categories {
         id
         name

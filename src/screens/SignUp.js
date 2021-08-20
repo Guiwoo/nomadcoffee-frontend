@@ -78,7 +78,7 @@ const SignUp = () => {
     if (loading) {
       return;
     }
-    const { username, email, password1, password2, name, location } = data;
+    const { username, email, password1, name, location } = data;
     createAccount({
       variables: {
         username,

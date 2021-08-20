@@ -2,18 +2,8 @@ import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import CoffeeIcon from "../component/CoffeeIcon";
-import Header from "../component/Header";
-import {
-  MainSection,
-  SectionBox,
-  SubSectionBox,
-} from "../component/shared/ScreenMain";
 
-const SMainSection = styled(MainSection)`
-  height: 80vh;
-`;
-
-const Loading = styled.div`
+const SLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +31,7 @@ const SCoffeeIcon = styled(CoffeeIcon)`
   animation: waiting 3s linear infinite;
 `;
 
-export default () => {
+const Loading = () => {
   return (
     <>
       <IconBox>
@@ -49,7 +39,9 @@ export default () => {
           <FontAwesomeIcon icon={faCoffee} />
         </SCoffeeIcon>
       </IconBox>
-      <Loading>Loading......</Loading>
+      <SLoading>Loading......</SLoading>
     </>
   );
 };
+
+export default Loading;

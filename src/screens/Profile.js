@@ -3,9 +3,7 @@ import gql from "graphql-tag";
 import { Route, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import FormBox from "../component/Auth/FormBox";
 import Header from "../component/Header";
-import ItemBox from "../component/Home/ItemBox";
 import PageTitle from "../component/PageTitle";
 import {
   MainSection,
@@ -51,11 +49,6 @@ const Inner = styled.div`
   display: flex;
   justify-content: center;
 `;
-const InnerEdit = styled(Inner)`
-  h1 {
-    font-size: 20px;
-  }
-`;
 
 const ItemsBox = styled.div`
   display: flex;
@@ -77,7 +70,7 @@ const SLink = styled(Link)`
   }
 `;
 
-export default () => {
+const Profile = () => {
   const { data } = useQuery(ME);
   const { pathname } = useLocation();
   return (
@@ -111,3 +104,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Profile;

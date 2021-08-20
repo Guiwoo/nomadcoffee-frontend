@@ -21,13 +21,10 @@ const ItemName = styled.div`
   margin-top: 10px;
 `;
 
-const BackImg = styled.div`
+const BackImg = styled.img`
   margin-left: 5px;
   width: 200px;
   height: 300px;
-  background: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60")
-    no-repeat;
-  background-size: 100%;
 `;
 
 const ItemOwner = styled.div`
@@ -63,7 +60,7 @@ const ItemBox = (data) => {
     <SItemBox {...data}>
       {data?.seeCoffeeShops?.map((shop, index) => (
         <Item key={index}>
-          <BackImg />
+          <BackImg src={shop.file} />
           <ItmeInfo>
             <ItemName>
               <SLink to={"#"}>💚 {shop.name}</SLink>

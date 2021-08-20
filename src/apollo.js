@@ -31,7 +31,7 @@ export const disableDarkMode = () => {
 };
 
 const httpLink = createHttpLink({
-  uri: "https://nomad-backend-guiwoo.herokuapp.com/",
+  uri: "https://nomad-backend-guiwoo.herokuapp.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
