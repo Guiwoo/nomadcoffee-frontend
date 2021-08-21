@@ -30,7 +30,7 @@ const Notification = ({ message }) => {
   return (
     <Container>
       <TheBox>
-        <span>Account has Created</span>
+        <span>{message}</span>
       </TheBox>
     </Container>
   );

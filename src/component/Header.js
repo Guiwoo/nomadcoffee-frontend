@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import gql from "graphql-tag";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { logUserOut } from "../apollo";
 import routes from "../route";
@@ -102,6 +102,13 @@ const ME_QUERY = gql`
 const Header = () => {
   const { pathname } = useLocation();
   const { data } = useQuery(ME_QUERY);
+  const history = useHistory();
+  const Logout = () => {
+    logUserOut();
+    history.push(routes.home, {
+      message: "Log out",
+    });
+  };
   return (
     <SHeader>
       <IconBox>
@@ -124,7 +131,7 @@ const Header = () => {
         <Profile amIhere={pathname === `/shop/${data?.me?.username}`}>
           <Thelink to={`/shop/${data?.me?.username}`}>Profile</Thelink>
         </Profile>
-        <LogoutBtn onClick={() => logUserOut()}>Log out</LogoutBtn>
+        <LogoutBtn onClick={Logout}>Log out</LogoutBtn>
       </DetailBox>
     </SHeader>
   );
