@@ -15,6 +15,7 @@ const Container = styled.button`
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.fontColor};
   border: none;
+  z-index: 1;
   &:hover {
     border: 3px solid ${(props) => props.theme.blue};
   }

@@ -39,6 +39,7 @@ const Title = styled.div`
   font-family: "Palette Mosaic", cursive;
 `;
 const HeaderIcon = styled(CoffeeIcon)`
+  color: white;
   position: absolute;
   top: 5px;
   font-size: 70px;

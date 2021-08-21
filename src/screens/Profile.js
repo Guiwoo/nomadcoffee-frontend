@@ -71,7 +71,9 @@ const SLink = styled(Link)`
 `;
 
 const Profile = () => {
-  const { data } = useQuery(ME);
+  const { data } = useQuery(ME, {
+    pollInterval: 500,
+  });
   const { pathname } = useLocation();
   return (
     <Container>

@@ -13,6 +13,7 @@ const TheBox = styled.div`
   color: black;
   font-weight: 600;
   font-size: 18px;
+  z-index: 0;
   @keyframes fadeIn {
     from {
       transform: translateY(0px);
