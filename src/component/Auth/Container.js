@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  color: white;
+  color: ${(props) => props.theme.fontColor};
   max-width: 100%;
   display: flex;
   justify-content: center;

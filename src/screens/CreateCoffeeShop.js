@@ -116,7 +116,7 @@ const CreateCoffeeShop = () => {
       return;
     }
     const { name, latitude, longitude, categoryItem, file } = data;
-    console.log(file[0]);
+    console.log(file);
     createCoffeeShop({
       variables: {
         name,

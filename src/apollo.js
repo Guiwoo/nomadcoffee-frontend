@@ -3,8 +3,11 @@ import {
   createHttpLink,
   InMemoryCache,
   makeVar,
+  from,
+  ApolloLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { createUploadLink } from "apollo-upload-client";
 
 const TOKEN = "token";
 const DARK_MODE = "dark";
@@ -43,7 +46,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const uploadLink = createUploadLink({
+  uri: "https://nomad-backend-guiwoo.herokuapp.com/graphql",
+});
+
 export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: ApolloLink.from([authLink, uploadLink]),
   cache: new InMemoryCache(),
 });
