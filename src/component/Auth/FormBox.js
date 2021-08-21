@@ -14,7 +14,7 @@ const FormBox = styled.form`
     box-sizing: border-box;
     padding: 5px;
     margin-bottom: 5px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid ${(props) => props.theme.fontColor};
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
     font-size: 18px;

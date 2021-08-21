@@ -13,7 +13,7 @@ const SHeader = styled.div`
   display: flex;
   height: 60px;
   justify-content: space-between;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid ${(props) => props.theme.fontColor};
   position: fixed;
   top: 0px;
   background-color: ${(props) => props.theme.bgColor};

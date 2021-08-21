@@ -9,7 +9,9 @@ export const HomeContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  color: white;
+  color: ${(props) => props.theme.fontColor};
+  background-color: ${(props) => props.theme.bgColor};
+  padding: 7px;
   font-weight: 600;
   font-size: 30px;
   position: absolute;
