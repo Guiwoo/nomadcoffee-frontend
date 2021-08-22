@@ -13,7 +13,7 @@
 # challenge 9!
 
 - Need to fix Image, Add Aws s3 or etc..(
-  Backend = file on coffeshop,avatar
-  Frontend = Create Account and Profile(avatar , coffeeshops)
+  Backend = avatar
+  Frontend = Create Account and Profile(avatar)
   )
 - Add location finder on Create a Coffeeshop
