@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useApolloClient, useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
@@ -88,13 +88,34 @@ const CREATE_COFFEE_SHOP = gql`
     }
   }
 `;
+const SEE_COFFEE_SHOPS = gql`
+  query seeCoffeeShops($page: Int!) {
+    seeCoffeeShops(page: $page) {
+      id
+      name
+      user {
+        id
+        username
+        avatarURL
+        totalFollowings
+      }
+      latitude
+      longitude
+      file
+      categories {
+        id
+        name
+      }
+    }
+  }
+`;
 
 const CreateCoffeeShop = () => {
   const history = useHistory();
   const { register, handleSubmit, formState, setError, clearErrors } = useForm({
     mode: "onChange",
   });
-
+  const client = useApolloClient();
   const [createCoffeeShop, { loading }] = useMutation(CREATE_COFFEE_SHOP, {
     onCompleted: (data) => {
       const {
@@ -110,13 +131,13 @@ const CreateCoffeeShop = () => {
         message: "Coffee shop created!",
       });
     },
+    refetchQueries: [{ query: SEE_COFFEE_SHOPS, variables: { page: 1 } }],
   });
   const onSubmitValid = (data) => {
     if (loading) {
       return;
     }
     const { name, latitude, longitude, categoryItem, file } = data;
-    console.log(file);
     createCoffeeShop({
       variables: {
         name,

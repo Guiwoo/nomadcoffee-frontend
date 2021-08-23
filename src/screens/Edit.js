@@ -73,6 +73,41 @@ const DELETE = gql`
   }
 `;
 
+const SEE_COFFEE_SHOPS = gql`
+  query seeCoffeeShops($page: Int!) {
+    seeCoffeeShops(page: $page) {
+      id
+      name
+      user {
+        id
+        username
+        avatarURL
+        totalFollowings
+      }
+      latitude
+      longitude
+      file
+      categories {
+        id
+        name
+      }
+    }
+  }
+`;
+
+const ME = gql`
+  query me {
+    me {
+      id
+      username
+      coffeeShops {
+        id
+        name
+      }
+    }
+  }
+`;
+
 const Edit = ({ coffeeShops, pathname }) => {
   const history = useHistory();
   const path = pathname.split("/");
@@ -105,6 +140,10 @@ const Edit = ({ coffeeShops, pathname }) => {
     variables: {
       id,
     },
+    refetchQueries: [
+      { query: SEE_COFFEE_SHOPS, variables: { page: 1 } },
+      { query: ME },
+    ],
   });
 
   const onSubmitValid = (data) => {

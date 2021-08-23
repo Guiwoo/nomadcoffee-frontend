@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
 import { HomeContainer, Title } from "../component/Home/HomeSection";
@@ -61,9 +61,7 @@ const Home = () => {
     variables: {
       page,
     },
-    pollInterval: 500,
   });
-
   return (
     <HomeContainer>
       <PageTitle pageTitle="Home" />
