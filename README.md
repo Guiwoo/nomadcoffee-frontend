@@ -17,3 +17,5 @@
   Frontend = Create Account and Profile(avatar)
   )
 - Add location finder on Create a Coffeeshop
+
+- Ci change
