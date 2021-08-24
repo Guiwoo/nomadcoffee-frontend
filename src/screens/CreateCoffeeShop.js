@@ -1,5 +1,6 @@
 import { useApolloClient, useMutation } from "@apollo/client";
 import gql from "graphql-tag";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -109,8 +110,21 @@ const SEE_COFFEE_SHOPS = gql`
     }
   }
 `;
+const ME = gql`
+  query me {
+    me {
+      coffeeShops
+    }
+  }
+`;
+const PreviewImg = styled.img`
+  margin-top: 30px;
+  width: 300px;
+  height: 250px;
+`;
 
 const CreateCoffeeShop = () => {
+  const [preview, SetPreview] = useState("");
   const history = useHistory();
   const { register, handleSubmit, formState, setError, clearErrors } = useForm({
     mode: "onChange",
@@ -131,7 +145,10 @@ const CreateCoffeeShop = () => {
         message: "Coffee shop created!",
       });
     },
-    refetchQueries: [{ query: SEE_COFFEE_SHOPS, variables: { page: 1 } }],
+    refetchQueries: [
+      { query: SEE_COFFEE_SHOPS, variables: { page: 1 } },
+      { query: ME },
+    ],
   });
   const onSubmitValid = (data) => {
     if (loading) {
@@ -157,9 +174,9 @@ const CreateCoffeeShop = () => {
       <Header />
       <CSectionBox>
         <STitle>Creat a Coffee Shop</STitle>
-        <SubSectionBox />
         <MainSection>
           <Check>
+            <PreviewImg src={preview ? preview : null} />
             <SFormBox
               method="post"
               enctype="multipart/form-data"
@@ -171,6 +188,10 @@ const CreateCoffeeShop = () => {
                   {...register("file", { required: "Photo is required!" })}
                   type="file"
                   accept="imgae/png, image/jpg"
+                  onChange={(e) => {
+                    const preview = URL.createObjectURL(e.target.files[0]);
+                    SetPreview(preview);
+                  }}
                 />
               </ImgFile>
               <label htmlFor="name">Name</label>
@@ -182,9 +203,6 @@ const CreateCoffeeShop = () => {
                 onFocus={clearLoginErorr}
               />
               <FormError message={formState.errors?.name?.message} />
-              <LocationFinder>
-                <button>Your Loaction</button>
-              </LocationFinder>
               <label htmlFor="latitude">Latitude </label>
               <input
                 {...register("latitude", { required: "Latitude is required" })}
@@ -217,7 +235,6 @@ const CreateCoffeeShop = () => {
             </SFormBox>
           </Check>
         </MainSection>
-        <SubSectionBox />
       </CSectionBox>
     </Container>
   );

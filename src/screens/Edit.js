@@ -72,7 +72,6 @@ const DELETE = gql`
     }
   }
 `;
-
 const SEE_COFFEE_SHOPS = gql`
   query seeCoffeeShops($page: Int!) {
     seeCoffeeShops(page: $page) {
@@ -94,7 +93,6 @@ const SEE_COFFEE_SHOPS = gql`
     }
   }
 `;
-
 const ME = gql`
   query me {
     me {
@@ -133,8 +131,12 @@ const Edit = ({ coffeeShops, pathname }) => {
         });
         return;
       }
-      console.log(error);
+      history.push("/");
     },
+    refetchQueries: [
+      { query: SEE_COFFEE_SHOPS, variables: { page: 1 } },
+      { query: ME },
+    ],
   });
   const [deleteCoffeeShop] = useMutation(DELETE, {
     variables: {
