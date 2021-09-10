@@ -17,3 +17,7 @@
   Frontend = Create Account and Profile(avatar)
   )
 - Add location finder on Create a Coffeeshop
+
+# What to do tomorrow !
+
+- Fixed Main Screen ! and Edit Page

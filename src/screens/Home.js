@@ -52,11 +52,12 @@ const PageToNext = styled.button`
   transition: all 0.3s linear;
   &:hover {
     transform: scale(1.2);
+    color: yellow;
   }
 `;
 
 const Home = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const { data } = useQuery(SEE_COFFEE_SHOPS, {
     variables: {
       page,
@@ -78,7 +79,7 @@ const Home = () => {
                   Back..
                 </PageToNext>
               ) : null}
-              {data?.seeCoffeeShops?.length < 4 ? null : (
+              {data?.seeCoffeeShops?.length < 2 ? null : (
                 <PageToNext onClick={() => setPage(page + 1)}>
                   Next..
                 </PageToNext>

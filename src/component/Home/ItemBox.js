@@ -4,15 +4,16 @@ import styled from "styled-components";
 const SItemBox = styled.div`
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 `;
 
 const Item = styled.div``;
 
 const ItmeInfo = styled.div`
   text-align: center;
-  border: 3px solid white;
   height: 170px;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 `;
 const ItemName = styled.div`
   color: black;
@@ -23,7 +24,7 @@ const ItemName = styled.div`
 
 const BackImg = styled.img`
   margin-left: 5px;
-  width: 200px;
+  width: 400px;
   height: 300px;
 `;
 
@@ -55,10 +56,10 @@ const SlugName = styled.div`
   display: flex;
 `;
 
-const ItemBox = (data) => {
+const ItemBox = ({ seeCoffeeShops }) => {
   return (
-    <SItemBox {...data}>
-      {data?.seeCoffeeShops?.map((shop, index) => (
+    <SItemBox>
+      {seeCoffeeShops?.map((shop, index) => (
         <Item key={index}>
           <BackImg src={shop.file} />
           <ItmeInfo>
