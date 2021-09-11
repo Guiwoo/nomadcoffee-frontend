@@ -1,25 +1,31 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-import { Route, useLocation } from "react-router";
-import { Link } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../component/Header";
 import PageTitle from "../component/PageTitle";
-import {
-  MainSection,
-  SectionBox,
-  SubSectionBox,
-} from "../component/shared/ScreenMain";
-import Edit from "./Edit";
+import SeperateTitle from "../component/Profile/SeperateTitle";
+import MyProfile from "./MyProfile";
 
 const ME = gql`
   query me {
     me {
-      id
       username
+      email
+      name
+      location
+      avatarURL
       coffeeShops {
         id
         name
+        file
+        latitude
+        longitude
+        categories {
+          id
+          name
+        }
       }
     }
   }
@@ -27,82 +33,137 @@ const ME = gql`
 
 const Container = styled.div`
   width: 100%;
-`;
-
-const Title = styled.div`
-  font-size: 25px;
-  margin-bottom: 15px;
-  align-items: center;
-  position: absolute;
-  left: 10px;
-  top: -15px;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  position: relative;
-  align-items: center;
-`;
-const Inner = styled.div`
-  width: 33%;
   display: flex;
   justify-content: center;
 `;
 
-const ItemsBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid black;
-  h3 {
-    margin-right: 30px;
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
+const SectionBox = styled.div`
+  width: 65%;
+  justify-content: center;
+  margin-top: 150px;
 `;
-const SLink = styled(Link)`
-  text-decoration: none;
+const IdProfileBox = styled.div`
+  display: flex;
+  border: 1px solid white;
+`;
+const ImageBox = styled.div`
+  padding: 20px;
+  margin-left: 20px;
+  width: 40%;
+`;
+const Image = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+`;
+const ProfileInfo = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  width: 60%;
+`;
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: white;
+`;
+const UserName = styled.div`
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 11px;
+`;
+const ProfilDetail = styled.div``;
+const CoffeeShopBox = styled.div`
+  width: 100%;
+  justify-content: center;
+  height: 20px;
+  margin-top: 20px;
+  position: relative;
+`;
+const BottomBox = styled.div``;
+const ImageGrid = styled.div`
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+`;
+const GirdContainer = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+`;
+const GridImage = styled.img`
+  width: 220px;
+  height: 120px;
+`;
+const GridTitle = styled.h3`
+  text-align: center;
+  font-weight: 600;
+`;
+const TheLink = styled(Link)`
+  color: white;
   cursor: pointer;
-  color: black;
-  &:hover {
-    color: yellow;
-  }
 `;
 
 const Profile = () => {
   const { data } = useQuery(ME);
-  const { pathname } = useLocation();
+  const location = useLocation();
   return (
     <Container>
       <PageTitle pageTitle="My Profile" />
       <Header />
       <SectionBox>
-        <SubSectionBox />
-        <MainSection>
-          <ContentBox>
-            <Inner>
-              <Title>Coffee Shops List</Title>
-              <div>
-                {data?.me?.coffeeShops?.map((shop, index) => (
-                  <ItemsBox key={index}>
-                    <h3>{shop.name}</h3>
-                    <SLink to={`${pathname}/${shop.name}`}>
-                      <span>Edit shop</span>
-                    </SLink>
-                  </ItemsBox>
+        <IdProfileBox>
+          <ImageBox>
+            <Image src="https://popularbio.com/wp-content/uploads/2021/05/Abigail-Cowen.jpg" />
+          </ImageBox>
+          <ProfileInfo>
+            <TextBox>
+              <UserName>
+                <span>{data?.me?.name}</span>
+              </UserName>
+              <ProfilDetail>
+                <label>Email : </label>
+                <span>{data?.me?.email}</span>
+              </ProfilDetail>
+              <ProfilDetail>
+                <label>Location : </label>
+                <span>{data?.me?.location}</span>
+              </ProfilDetail>
+            </TextBox>
+          </ProfileInfo>
+        </IdProfileBox>
+        {location?.pathname?.length > 10 ? (
+          <MyProfile />
+        ) : (
+          <CoffeeShopBox>
+            <SeperateTitle text={"Coffee Shops"} />
+            <BottomBox>
+              <ImageGrid>
+                {data?.me?.coffeeShops?.map((coffeeShop) => (
+                  <GirdContainer>
+                    <TheLink
+                      to={{
+                        pathname: `/shop/${data?.me?.username}/${coffeeShop.id}`,
+                        state: { coffeeShop },
+                      }}
+                    >
+                      <GridImage src={coffeeShop.file} />
+                      <GridTitle>{coffeeShop.name}</GridTitle>
+                    </TheLink>
+                  </GirdContainer>
                 ))}
-              </div>
-            </Inner>
-          </ContentBox>
-        </MainSection>
-        <SubSectionBox />
+              </ImageGrid>
+            </BottomBox>
+          </CoffeeShopBox>
+        )}
       </SectionBox>
-      <Route path={`/shop/:username/:coffeeShop`} exact>
-        <Edit {...data?.me} pathname={pathname} />
-      </Route>
     </Container>
   );
 };
+
+// <Edit {...data?.me} pathname={pathname} /> put it back on 182
 
 export default Profile;
