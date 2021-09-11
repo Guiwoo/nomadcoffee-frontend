@@ -8,7 +8,6 @@ import SeperateTitle from "../component/Profile/SeperateTitle";
 
 const Conataienr = styled.div`
   width: 100%;
-  justify-content: center;
   height: 20px;
   margin-top: 20px;
   position: relative;
@@ -56,6 +55,24 @@ const EditButton = styled.input`
   background-color: #abf0d1;
   border-radius: 20px;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.3);
+  }
+`;
+const DeleteBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const DeleteBtn = styled.button`
+  color: white;
+  padding: 5px 15px;
+  background-color: #abf0d1;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 const EDIT_MUTATION = gql`
@@ -125,8 +142,9 @@ export default () => {
       const {
         editCoffeeShop: { ok, error },
       } = data;
-      history.push(`/`);
+      history.push(`/shop/:id`);
     },
+    refetchQueries: ["me"],
   });
   const onSubmitValid = (data) => {
     if (loading) {
@@ -143,6 +161,17 @@ export default () => {
       },
     });
   };
+  const [deleteCoffeeShop] = useMutation(DELETE, {
+    variables: {
+      id: coffeeShop.id,
+    },
+    refetchQueries: ["me"],
+  });
+  const onDeleteClick = () => {
+    deleteCoffeeShop();
+    history.push("/shop/:id");
+  };
+
   return (
     <Conataienr>
       <SeperateTitle text={`Edit: ${coffeeShop?.name}`} />
@@ -204,6 +233,9 @@ export default () => {
             </div>
           </MyFormBox>
         </CoffeeShopInfo>
+        <DeleteBox>
+          <DeleteBtn onClick={onDeleteClick}>Delete</DeleteBtn>
+        </DeleteBox>
       </EditBox>
     </Conataienr>
   );
