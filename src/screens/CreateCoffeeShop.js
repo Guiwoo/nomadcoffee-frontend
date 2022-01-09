@@ -173,7 +173,6 @@ const CreateCoffeeShop = () => {
       <PageTitle pageTitle="A Coffee Shop" />
       <Header />
       <CSectionBox>
-        <STitle>Creat a Coffee Shop</STitle>
         <MainSection>
           <Check>
             <PreviewImg src={preview ? preview : null} />

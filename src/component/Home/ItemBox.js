@@ -12,8 +12,6 @@ const Item = styled.div``;
 const ItmeInfo = styled.div`
   text-align: center;
   height: 170px;
-  border-right: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 `;
 const ItemName = styled.div`
   color: black;
@@ -23,8 +21,7 @@ const ItemName = styled.div`
 `;
 
 const BackImg = styled.img`
-  margin-left: 5px;
-  width: 400px;
+  width: 70%;
   height: 300px;
 `;
 
@@ -61,25 +58,35 @@ const ItemBox = ({ seeCoffeeShops }) => {
     <SItemBox>
       {seeCoffeeShops?.map((shop, index) => (
         <Item key={index}>
-          <BackImg src={shop.file} />
-          <ItmeInfo>
-            <ItemName>
-              <SLink to={"#"}>💚 {shop.name}</SLink>
-            </ItemName>
-            <ItemOwner>Owner : {shop.user.username}</ItemOwner>
-            <ItemOwner>
-              Location : {shop.latitude},{shop.longitude}
-            </ItemOwner>
-            <SLink to={"#"}> Search Location...🔎</SLink>
-            <SItemSlug>
-              <SlugName>💚 Slugs..!</SlugName>
-              {shop.categories.map((word, index) => (
-                <ItemOwner key={index} style={{ color: "white" }}>
-                  {word.name}
-                </ItemOwner>
-              ))}
-            </SItemSlug>
-          </ItmeInfo>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <BackImg src={shop.file} />
+          </div>
+          <div
+            style={{
+              marginTop: "10px",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <ItmeInfo>
+              <ItemName>
+                <SLink to={"#"}>💚 {shop.name}</SLink>
+              </ItemName>
+              <ItemOwner>Owner : {shop.user.username}</ItemOwner>
+              <ItemOwner>
+                Location : {shop.latitude},{shop.longitude}
+              </ItemOwner>
+              <SLink to={"#"}> Search Location...🔎</SLink>
+              <SItemSlug>
+                <SlugName>💚 Slugs..!</SlugName>
+                {shop.categories.map((word, index) => (
+                  <ItemOwner key={index} style={{ color: "white" }}>
+                    {word.name}
+                  </ItemOwner>
+                ))}
+              </SItemSlug>
+            </ItmeInfo>
+          </div>
         </Item>
       ))}
     </SItemBox>

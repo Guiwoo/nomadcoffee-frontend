@@ -13,10 +13,8 @@ const SHeader = styled.div`
   display: flex;
   height: 60px;
   justify-content: space-between;
-  border-bottom: 2px solid ${(props) => props.theme.fontColor};
   position: fixed;
   top: 0px;
-  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const ThirtyThree = styled.div`
@@ -32,14 +30,12 @@ const IconBox = styled(ThirtyThree)`
 `;
 const Title = styled.div`
   position: absolute;
-  background-color: ${(props) => props.theme.bgColor};
   top: 15px;
   padding: 15px;
   font-size: 50px;
   font-family: "Palette Mosaic", cursive;
 `;
 const HeaderIcon = styled(CoffeeIcon)`
-  color: white;
   position: absolute;
   top: 5px;
   font-size: 70px;
@@ -49,7 +45,6 @@ const DetailBox = styled(ThirtyThree)`
   justify-content: space-between;
   font-family: "Palette Mosaic", cursive;
   top: 30px;
-  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Thelink = styled(Link)`
@@ -61,21 +56,21 @@ const ShopsBtn = styled.div`
   padding: 7px 0px;
   border-radius: 3px;
   background-color: ${(props) =>
-    props.amIhere ? "rgba(200, 200, 200, 0.3)" : props.theme.bgColor};
+    props.amIhere ? "rgba(200, 200, 200, 0.3)" : "transparnat"};
 `;
 
 const Profile = styled.div`
   padding: 7px 0px;
   border-radius: 3px;
   background-color: ${(props) =>
-    props.amIhere ? "rgba(200, 200, 200, 0.3)" : props.theme.bgColor};
+    props.amIhere ? "rgba(200, 200, 200, 0.3)" : "transparant"};
 `;
 
 const CreateBtn = styled.div`
   padding: 7px 0px;
   border-radius: 3px;
   background-color: ${(props) =>
-    props.amIhere ? "rgba(200, 200, 200, 0.3)" : props.theme.bgColor};
+    props.amIhere ? "rgba(200, 200, 200, 0.3)" : "transparant"};
 `;
 
 const LogoutBtn = styled.button`

@@ -23,9 +23,6 @@ const ImageBox = styled.img`
   height: 200px;
   display: block;
 `;
-const ChangeBox = styled.input`
-  margin-top: 7px;
-`;
 const CoffeeShopInfo = styled.div`
   padding: 20px;
   display: flex;
@@ -116,6 +113,19 @@ const SEE_COFFEE_SHOP = gql`
     }
   }
 `;
+
+const SEE_PROFILE = gql`
+  query seeProfile($username: string!) {
+    seeCoffeeShop(username: $username) {
+      coffeeShops {
+        id
+        name
+        file
+      }
+    }
+  }
+`;
+
 const DELETE = gql`
   mutation deleteCoffeeShop($id: Int!) {
     deleteCoffeeShop(id: $id) {
@@ -124,7 +134,7 @@ const DELETE = gql`
   }
 `;
 
-export default () => {
+const MyProfile = () => {
   const {
     state: { coffeeShop },
   } = useLocation();
@@ -240,3 +250,5 @@ export default () => {
     </Conataienr>
   );
 };
+
+export default MyProfile;

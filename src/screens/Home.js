@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import { useState } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
-import { HomeContainer, Title } from "../component/Home/HomeSection";
+import { HomeContainer } from "../component/Home/HomeSection";
 import ItemBox from "../component/Home/ItemBox";
 import PageTitle from "../component/PageTitle";
 import {
@@ -40,15 +40,18 @@ const SMainSection = styled(MainSection)`
 `;
 
 const PageBox = styled.div`
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
 `;
 
 const PageToNext = styled.button`
   background-color: inherit;
+  border: none;
   margin-top: 10px;
   cursor: pointer;
   font-size: 14px;
+  color: #5ed2f3;
   transition: all 0.3s linear;
   &:hover {
     transform: scale(1.2);
@@ -71,7 +74,6 @@ const Home = () => {
         <SectionBox>
           <SubSectionBox />
           <SMainSection>
-            <Title>Coffee Shops</Title>
             <ItemBox {...data} />
             <PageBox>
               {page > 1 ? (

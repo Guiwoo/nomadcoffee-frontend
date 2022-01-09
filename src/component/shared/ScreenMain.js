@@ -12,7 +12,6 @@ export const MainSection = styled.div`
   justify-content: center;
   flex-direction: column;
   border: 2px solid ${(props) => props.theme.borderColor};
-  background-color: #dccab2;
 `;
 
 export const SubSectionBox = styled.div`
