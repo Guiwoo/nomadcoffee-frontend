@@ -28,6 +28,7 @@ const FormBox = styled.form`
     }
     &::placeholder {
       font-size: 17px;
+      color: white;
     }
   }
 `;
