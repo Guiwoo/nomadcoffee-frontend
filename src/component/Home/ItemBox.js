@@ -23,6 +23,7 @@ const ItemName = styled.div`
 const BackImg = styled.img`
   width: 70%;
   height: 300px;
+  border-radius: 20px;
 `;
 
 const ItemOwner = styled.div`
